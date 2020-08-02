@@ -37,10 +37,12 @@ def main():
     g = 9.81
     x_m = []
     y_m = []
+    time = [int(i) for i in range(601)]
+    v = []
     # p_ypr and p со старта и до конца топлива
     # if p_ypr = 0: omega = 0
     # t(0...600)c
-    for t in range(601):
+    for t in time:
         m_Tt = m_t0 - (P + P_ypr) / i * t
         m_PH = m0 - m_t0 + m_Tt if m_Tt > 0 else m0 - m_t0
         P_t = P if m_Tt > 0 else 0
@@ -58,6 +60,8 @@ def main():
         y += V_y
         x_m.append(x)
         y_m.append(y)
+
+
     fig.add_trace(go.Scatter(x=x_m, y=y_m))
     plotly.offline.plot(fig, filename='file.html')
     fig.show()
