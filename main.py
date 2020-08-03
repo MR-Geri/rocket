@@ -15,9 +15,9 @@ def main():
     fig.update_xaxes(range=[10, 125.15 + 50], zeroline=True, zerolinewidth=2, zerolinecolor='#008000')
     fig.update_layout(legend_orientation="h",
                       legend=dict(x=.5, xanchor="center"),
-                      title="y/x",
-                      xaxis_title="Длина полёта",
-                      yaxis_title="Высота полёта",
+                      title="График",
+                      xaxis_title="x",
+                      yaxis_title="y",
                       margin=dict(l=0, r=0, t=30, b=0))
     m0 = 50000  # кг
     P = 700000  # KH
@@ -73,7 +73,6 @@ def main():
     fig.add_trace(go.Scatter(x=time, y=v_main_y, name='V_x(t)'))
     fig.add_trace(go.Scatter(x=time, y=v, name='V(t)'))
     plotly.offline.plot(fig, filename='file.html')
-    fig.update_layout(legend_orientation="h")
     fig.show()
 
 
