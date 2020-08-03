@@ -67,9 +67,9 @@ def main():
         v.append(np.sqrt(V_x ** 2 + V_y ** 2))
 
     fig.add_trace(go.Scatter(x=x_m, y=y_m, name='$$y=f(x)$$'))
-    fig.add_trace(go.Scatter(x=time, y=v_main_x, name='$$V_y от времени$$'))
-    fig.add_trace(go.Scatter(x=time, y=v_main_y, name='$$V_x от времени$$'))
-    fig.add_trace(go.Scatter(x=time, y=v, name='$$V от времени$$'))
+    fig.add_trace(go.Scatter(x=time, y=v_main_x, name='$$V_y(t)$$'))
+    fig.add_trace(go.Scatter(x=time, y=v_main_y, name='$$V_x(t)$$'))
+    fig.add_trace(go.Scatter(x=time, y=v, name='$$V(t)$$'))
     plotly.offline.plot(fig, filename='file.html')
     fig.show()
 
