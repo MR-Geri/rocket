@@ -38,6 +38,8 @@ def main():
     x_m = []
     y_m = []
     time = [int(i) for i in range(601)]
+    v_main_x = []
+    v_main_y = []
     v = []
     # p_ypr and p со старта и до конца топлива
     # if p_ypr = 0: omega = 0
@@ -60,9 +62,14 @@ def main():
         y += V_y
         x_m.append(x)
         y_m.append(y)
+        v_main_x.append(V_x)
+        v_main_y.append(V_y)
+        v.append(np.sqrt(V_x ** 2 + V_y ** 2))
 
-
-    fig.add_trace(go.Scatter(x=x_m, y=y_m))
+    fig.add_trace(go.Scatter(x=x_m, y=y_m, name='$$y=f(x)$$'))
+    fig.add_trace(go.Scatter(x=time, y=v_main_x, name='$$V_y от времени$$'))
+    fig.add_trace(go.Scatter(x=time, y=v_main_y, name='$$V_x от времени$$'))
+    fig.add_trace(go.Scatter(x=time, y=v, name='$$V от времени$$'))
     plotly.offline.plot(fig, filename='file.html')
     fig.show()
 
