@@ -19,13 +19,13 @@ def main():
                       xaxis_title="x",
                       yaxis_title="y",
                       margin=dict(l=0, r=0, t=30, b=0))
-    m0 = 50000  # кг
-    P = 700000  # KH
+    m0 = 14500  # кг
+    P = 270000  # KH
     i = 2700  # м/c
-    m_t0 = 40000
+    m_t0 = 10500
     P_ypr = 5  # H
-    le = 15  # м
-    d = 1  # м
+    le = 14  # м
+    d = 1.65  # м
     R_x = 100  # H
     R_y = 0
     x = 0
@@ -37,7 +37,7 @@ def main():
     g = 9.81
     x_m = []
     y_m = []
-    time = [int(i) for i in range(601)]
+    time = [int(i) for i in range(357)]
     v_main_x = []
     v_main_y = []
     v = []
