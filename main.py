@@ -30,8 +30,8 @@ def main():
     V_x = 0
     V_y = 0
     g = 9.81
-    x_m = []
-    y_m = []
+    x_main = []
+    y_main = []
     time = [int(i) for i in range(455)]
     v_main_x = []
     v_main_y = []
@@ -55,12 +55,14 @@ def main():
         V_y += ((P_t - R_y) * np.sin(np.pi / 2 - fit) + P_ypr * np.cos(np.pi / 2 - fit) - m_PH * g) / m_PH
         x += V_x
         y += V_y
-        x_m.append(x)
-        y_m.append(y)
+        x_main.append(x)
+        y_main.append(y)
         v_main_x.append(V_x)
         v_main_y.append(V_y)
         v.append(np.sqrt(V_x ** 2 + V_y ** 2))
         mass.append(m_PH)
+    x_m = x_main
+    y_m = y_main
     # Уточнение конца графика
     for _ in range(3):
         for i in y_m:
@@ -80,14 +82,14 @@ def main():
             x_m = x_m[:j]
             break
     time = time[:-1]
-    # fig.add_trace(go.Scatter(x=x_m, y=y_m, name='y=f(x)'))
-    fig.add_trace(go.Scatter(x=time, y=x_m, name='x(t)'))
-    fig.add_trace(go.Scatter(x=time, y=y_m, name='y(t)'))
+    fig.add_trace(go.Scatter(x=x_m, y=y_m, name='y=f(x)'))
+    fig.add_trace(go.Scatter(x=time, y=x_main, name='x(t)'))
+    fig.add_trace(go.Scatter(x=time, y=y_main, name='y(t)'))
     fig.add_trace(go.Scatter(x=time, y=v_main_x, name='V_y(t)'))
     fig.add_trace(go.Scatter(x=time, y=v_main_y, name='V_x(t)'))
     fig.add_trace(go.Scatter(x=time, y=v, name='V(t)'))
     fig.add_trace(go.Scatter(x=time, y=mass, name='mass(t)'))
-    plotly.offline.plot(fig, filename='file_main.html')
+    plotly.offline.plot(fig, filename='main.html')
     # fig.show()
 
 
