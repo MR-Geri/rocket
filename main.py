@@ -1,9 +1,7 @@
 import plotly.graph_objs as go
 import plotly
-from plotly.subplots import make_subplots
 
 import numpy as np
-import pandas as pd
 
 
 accuracy = 0.01
@@ -51,7 +49,6 @@ def main():
         P_t = P if m_Tt > 0 else 0
         P_ypr = P_ypr if m_Tt > 0 else 0
         M_ypr = P_ypr * le / 2
-        # I_i = 0.25 * m_PH * ((d / 2) ** 2) + (1 / 12) * m_PH * (le ** 2)
         I_i = (1 / 16) * m_Tt * (d ** 2) + (1 / 12) * m_Tt * (le ** 2)
         d_omega = M_ypr / I_i
         omega = omega + d_omega if m_Tt > 0 else 0
