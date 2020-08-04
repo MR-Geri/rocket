@@ -14,7 +14,7 @@ def main():
                       xaxis_title="x",
                       yaxis_title="y",
                       margin=dict(l=0, r=0, t=30, b=0))
-    accuracy = 0.000001
+    accuracy = 10000
     m0 = 12500  # кг
     P = 270000  # KH
     i = 2700  # м/c
