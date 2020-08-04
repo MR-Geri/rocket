@@ -4,9 +4,6 @@ import plotly
 import numpy as np
 
 
-accuracy = 0.01
-
-
 def main():
     fig = go.Figure()
     fig.update_yaxes(range=[0, 708000], zeroline=True, zerolinewidth=2, zerolinecolor='LightPink')
@@ -17,7 +14,8 @@ def main():
                       xaxis_title="x",
                       yaxis_title="y",
                       margin=dict(l=0, r=0, t=30, b=0))
-    m0 = 14500  # кг
+    accuracy = 0.01
+    m0 = 12500  # кг
     P = 270000  # KH
     i = 2700  # м/c
     m_t0 = 10500
@@ -35,7 +33,7 @@ def main():
     g = 9.81
     x_m = []
     y_m = []
-    time = [int(i) for i in range(357)]
+    time = [int(i) for i in range(455)]
     v_main_x = []
     v_main_y = []
     v = []
@@ -64,8 +62,13 @@ def main():
         v_main_y.append(V_y)
         v.append(np.sqrt(V_x ** 2 + V_y ** 2))
         mass.append(m_PH)
-
-    fig.add_trace(go.Scatter(x=x_m, y=y_m, name='y=f(x)'))
+    x_main = []
+    y_main = []
+    for i in range(1, len(x_m)):
+        x_main.extend(np.arange(x_m[i - 1], x_m[i], (x_m[i] - x_m[i - 1]) / accuracy))
+    for i in range(1, len(y_m)):
+        y_main.extend(np.arange(y_m[i - 1], y_m[i], (y_m[i] - y_m[i - 1]) / accuracy))
+    fig.add_trace(go.Scatter(x=x_main, y=y_main, name='y=f(x)'))
     fig.add_trace(go.Scatter(x=time, y=x_m, name='x(t)'))
     fig.add_trace(go.Scatter(x=time, y=y_m, name='y(t)'))
     fig.add_trace(go.Scatter(x=time, y=v_main_x, name='V_y(t)'))
