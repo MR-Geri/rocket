@@ -88,8 +88,8 @@ def main():
     fig.add_trace(go.Scatter(x=time, y=v_main_y, name='V_x(t)'))
     fig.add_trace(go.Scatter(x=time, y=v, name='V(t)'))
     fig.add_trace(go.Scatter(x=time, y=mass, name='mass(t)'))
-    # plotly.offline.plot(fig, filename='file.html')
-    fig.show()
+    plotly.offline.plot(fig, filename='file.html')
+    # fig.show()
 
 
 main()
