@@ -41,6 +41,7 @@ def main():
     v_main_x = []
     v_main_y = []
     v = []
+    mass = []
     # p_ypr and p со старта и до конца топлива
     # if p_ypr = 0: omega = 0
     # t(0...600)c
@@ -65,6 +66,7 @@ def main():
         v_main_x.append(V_x)
         v_main_y.append(V_y)
         v.append(np.sqrt(V_x ** 2 + V_y ** 2))
+        mass.append(m_PH)
 
     fig.add_trace(go.Scatter(x=x_m, y=y_m, name='y=f(x)'))
     fig.add_trace(go.Scatter(x=time, y=x_m, name='x(t)'))
@@ -72,6 +74,7 @@ def main():
     fig.add_trace(go.Scatter(x=time, y=v_main_x, name='V_y(t)'))
     fig.add_trace(go.Scatter(x=time, y=v_main_y, name='V_x(t)'))
     fig.add_trace(go.Scatter(x=time, y=v, name='V(t)'))
+    fig.add_trace(go.Scatter(x=time, y=mass, name='mass(t)'))
     plotly.offline.plot(fig, filename='file.html')
     fig.show()
 
