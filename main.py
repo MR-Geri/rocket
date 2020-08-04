@@ -14,7 +14,7 @@ def main():
                       xaxis_title="x",
                       yaxis_title="y",
                       margin=dict(l=0, r=0, t=30, b=0))
-    accuracy = 10000
+    accuracy = 100
     m0 = 12500  # кг
     P = 270000  # KH
     i = 2700  # м/c
@@ -62,20 +62,33 @@ def main():
         v_main_y.append(V_y)
         v.append(np.sqrt(V_x ** 2 + V_y ** 2))
         mass.append(m_PH)
-    x_main = []
-    y_main = []
-    for i in range(1, len(x_m)):
-        x_main.extend(np.arange(x_m[i - 1], x_m[i], (x_m[i] - x_m[i - 1]) / accuracy))
-    for i in range(1, len(y_m)):
-        y_main.extend(np.arange(y_m[i - 1], y_m[i], (y_m[i] - y_m[i - 1]) / accuracy))
-    fig.add_trace(go.Scatter(x=x_main, y=y_main, name='y=f(x)'))
+    # Уточнение конца графика
+    for _ in range(3):
+        for i in y_m:
+            if i < 0:
+                j = y_m.index(i)
+                temp = [x_m[j], y_m[j], x_m[j - 1], y_m[j - 1]]
+                x_m = x_m[:j - 1]
+                y_m = y_m[:j - 1]
+                x_m.extend(np.arange(temp[2], temp[0], (temp[0] - temp[2]) / 10000))
+                y_m.extend(np.arange(temp[3], temp[1], (temp[1] - temp[3]) / 10000))
+                break
+    # отрезание минусовых значений
+    for s in y_m:
+        if s < 0:
+            j = y_m.index(s)
+            y_m = y_m[:j]
+            x_m = x_m[:j]
+            break
+    time = time[:-1]
+    fig.add_trace(go.Scatter(x=x_m, y=y_m, name='y=f(x)'))
     fig.add_trace(go.Scatter(x=time, y=x_m, name='x(t)'))
     fig.add_trace(go.Scatter(x=time, y=y_m, name='y(t)'))
     fig.add_trace(go.Scatter(x=time, y=v_main_x, name='V_y(t)'))
     fig.add_trace(go.Scatter(x=time, y=v_main_y, name='V_x(t)'))
     fig.add_trace(go.Scatter(x=time, y=v, name='V(t)'))
     fig.add_trace(go.Scatter(x=time, y=mass, name='mass(t)'))
-    plotly.offline.plot(fig, filename='file.html')
+    # plotly.offline.plot(fig, filename='file.html')
     fig.show()
 
 
