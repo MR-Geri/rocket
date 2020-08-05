@@ -2,6 +2,7 @@ import plotly.graph_objs as go
 import plotly
 
 import numpy as np
+import datetime
 
 
 def main():
@@ -40,6 +41,7 @@ def main():
     # p_ypr and p со старта и до конца топлива
     # if p_ypr = 0: omega = 0
     # t(0...600)c
+    data = datetime.datetime.now()
     for t in time:
         m_Tt = m_t0 - (P + P_ypr) / i * t
         m_PH = m0 - m_t0 + m_Tt if m_Tt > 0 else m0 - m_t0
@@ -61,6 +63,8 @@ def main():
         v_main_y.append(V_y)
         v.append(np.sqrt(V_x ** 2 + V_y ** 2))
         mass.append(m_PH)
+    print(datetime.datetime.now() - data)
+    data = datetime.datetime.now()
     x_m = x_main
     y_m = y_main
     # Уточнение конца графика
@@ -81,6 +85,8 @@ def main():
             y_m = y_m[:j]
             x_m = x_m[:j]
             break
+    print(datetime.datetime.now() - data)
+    data = datetime.datetime.now()
     time = time[:-1]
     fig.add_trace(go.Scatter(x=x_m, y=y_m, name='y=f(x)'))
     fig.add_trace(go.Scatter(x=time, y=x_main, name='x(t)'))
@@ -89,8 +95,9 @@ def main():
     fig.add_trace(go.Scatter(x=time, y=v_main_y, name='V_x(t)'))
     fig.add_trace(go.Scatter(x=time, y=v, name='V(t)'))
     fig.add_trace(go.Scatter(x=time, y=mass, name='mass(t)'))
-    plotly.offline.plot(fig, filename='main.html')
-    # fig.show()
+    #plotly.offline.plot(fig, filename='main.html')
+    fig.show()
+    print(datetime.datetime.now() - data)
     #Last
 
 
